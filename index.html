@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GDG Cybersecurity Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      background:#020617;
+      color:white;
+      font-family:Arial;
+      text-align:center;
+      padding-top:80px;
+    }
+    h1 { color:#38bdf8; }
+    p { opacity:0.85; }
+  </style>
+</head>
+
+<body>
+
+<h1>🔐 GDG Cybersecurity Awareness</h1>
+<p>Thanks for scanning the QR code</p>
+<p>This demo shows how much data a normal website can see</p>
+<p><b>No personal data is stored</b></p>
+
+<script>
+const ua = navigator.userAgent;
+
+function getOS(){
+  if(ua.includes("Android")) return "Android";
+  if(ua.includes("iPhone")) return "iPhone";
+  if(ua.includes("Windows")) return "Windows";
+  if(ua.includes("Mac")) return "MacOS";
+  return "Unknown";
+}
+
+function getBrowser(){
+  if(ua.includes("Chrome")) return "Chrome";
+  if(ua.includes("Safari")) return "Safari";
+  if(ua.includes("Firefox")) return "Firefox";
+  if(ua.includes("Brave")) return "Brave";
+  return "Unknown";
+}
+
+const data = {
+  device: /Mobi/.test(ua) ? "Mobile" : "Desktop",
+  browser: getBrowser(),
+  os: getOS(),
+  screen: screen.width + "x" + screen.height,
+  lang: navigator.language
+};
+
+// 🔴 IMPORTANT: replace this URL
+fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjtts8A0INXJ67G_BVv4736GMoOBjiVmV2Oqf_Yi0UaNdOZbgKYaubkX1V0qX9PgmU3PgKxsRUQL2LvSKuVzcRCYT_Z9BJjZ1SJqNnCuuN6N3w2UXcOz4GR3aiMZ_uO2idnZqSeMr_-TGBDh8erBFrcXs0qwXDWGizztQbpMSC2FHp7IPzfO4OxZMfgAdR2S85R0SIN5PWlTL5WHFpJ1zg4tRWItlIB-RAtg6DAR_Q0J_-VA557f7nlQkDgoO1Vq8Rf-ow6stXA_qsPsmDqh38oR9585w&lib=MQaVkr-n57482xnfHZdD9Xj_DLMbnuuk7" +
+  "device=" + data.device +
+  "&browser=" + data.browser +
+  "&os=" + data.os +
+  "&screen=" + data.screen +
+  "&lang=" + data.lang
+);
+</script>
+
+</body>
+</html>
