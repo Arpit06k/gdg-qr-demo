@@ -1,7 +1,6 @@
 <script>
 async function collectData() {
 
-  // get IP info
   const ipData = await fetch("https://ipwho.is/").then(r => r.json());
 
   const ua = navigator.userAgent;
@@ -34,7 +33,7 @@ async function collectData() {
   });
 
   fetch(
-    "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?" +
+    "https://script.google.com/macros/s/AKfycbxfjA9iKWgXo60-3nSECQj4SV88ipZI5YMvrmKZaE3zXkK3JZBfXeaAKG6MMbTIWMRy/exec?" +
       params.toString(),
     { mode: "no-cors" }
   );
